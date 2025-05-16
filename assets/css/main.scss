@@ -1,0 +1,71 @@
+--- 
+# Only the main Sass file needs front matter (the dashes are enough) 
+--- 
+
+
+@charset "utf-8";
+
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
+@import "minimal-mistakes"; // main partials
+
+@import url('https://fonts.googleapis.com/css2?family=Song+Myung&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=BioRhyme:wght@200;300;400;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crete+Round:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+// @font-face {
+//    font-family: 'RIDIBatang';
+//    font-weight: normal;
+//    src: url(/assets/css/fonts/RIDIBatang.otf);
+// }
+
+// "Cafe24Oneprettynight"
+@font-face {
+   font-family: 'Cafe24Oneprettynight';
+   src: local('Cafe24Oneprettynight'), url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff');
+   font-weight: normal;
+   font-style: normal;
+}
+
+// 전체 기본 폰트 적용
+html, body {
+   font-family: 'Cafe24Oneprettynight', sans-serif !important;
+}
+ 
+ // 제목 및 메뉴에도 동일 폰트 적용
+h1, h2, h3, h4, h5, h6,
+.masthead__title,          // 블로그 상단 제목
+.page__title,              // 페이지 제목
+.sidebar__title,           // 사이드바 제목
+.site-nav,                 // 헤더 메뉴
+.page__meta,               // 날짜나 메타 정보
+a {                        // 링크도 폰트 적용
+   font-family: 'Cafe24Oneprettynight', sans-serif !important;
+}
+
+/* 1. 블로그 제목: 기울임 제거 + 굵게 강조 */
+.site-title {
+   font-family: 'Cafe24Oneprettynight', sans-serif !important;
+   font-style: normal !important;   // 기울임 제거
+   font-weight: bold !important;    // 굵게 강조
+   font-size: 1.7rem !important;
+}
+
+ /* 2. 사이드바 제목 Title1, Title2, Title3 */
+.nav__title {
+   font-family: 'Cafe24Oneprettynight', sans-serif !important;
+   font-weight: bold;
+   font-size: 1.2rem;
+}
+
+ /* 3. 전체 글꼴 크기 키우기 */
+html {
+   font-size: 110%; // 기본 100% → 약 1~2pt 커짐
+}

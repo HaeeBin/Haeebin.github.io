@@ -1,0 +1,37 @@
+# main links
+main:
+  - title: "Home"
+    url: https://haeebin.github.io/
+
+  - title: "About"
+    url: /about/
+
+  # - title: "GitHub"
+  #   url: https://github.com/haeebin
+
+  - title: "Categories"
+    url: /categories/
+
+categories:
+  - title: "Study"
+    children:
+      - title: "SQL"
+        url: /categories/SQL/
+      - title: "Categories2"
+        url: /categories/categories2/
+      - title: "Categories3"
+        url: /categories/categories3/
+      - title: "Categories4"
+        url: /categories/categories4/
+
+  - title: "Title2"
+    children:
+      - title: "Categories5"
+        url: /categories/categories5/
+      - title: "Categories6"
+        url: /categories/categories6/
+
+  - title: "Title3"
+    children:
+      - title: "Categories7"
+        url: /categories/categories7/
