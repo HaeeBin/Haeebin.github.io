@@ -401,6 +401,7 @@ SELECT UPPER('bigquery')
                  (Bigquery에서는 기본적으로 UTC 기준 시간이 표현)
     - ex) 2025-02-22 20:11:40.000UTC
 <br>
+
 - Timezone에서 GMT와 UTC는?
   - GMT : Greenwich Mean Time(한국 시간 : GMT +9)
     - 영국의 그리니치 천문대(경도 0도)를 기준으로 지역에 따른 시간의 차이를 조정하기 위해 생긴 시간의 구분선(1884년 채택)
@@ -414,6 +415,7 @@ SELECT UPPER('bigquery')
     - UTC부터 경과한 시간을 나타내는 값
     - Timezone 정보 있음
 <br>
+
 - `millisecond`, `microsecond`
   - `millisecond(ms)`
     - 시간의 단위. 천 분의 1초(1,000ms = 1초)
@@ -434,10 +436,11 @@ SELECT UPPER('bigquery')
 
 - `TIMESTAMP`와 `DATETIME`의 차이
 
-  |  | TIMESTAMP | DATETIME |
-  | -- | -- | -- |
-  | 타임존 | UTC라고 나옴 | T가 나옴(Time을 의미) |
-  | 시간 차이 | 한국 시간 -9시간 | 한국 Zone 사용 시 한국 시간과 동일 |
+|  | TIMESTAMP | DATETIME |
+| -- | -- | -- |
+| 타임존 | UTC라고 나옴 | T가 나옴(Time을 의미) |
+| 시간 차이 | 한국 시간 -9시간 | 한국 Zone 사용 시 한국 시간과 동일 |
+
 <br>
 
 #### 현재 시간을 다루기 : CURRENT_DATE / CURRENT_DATETIME / CURRENT_TIMESTAMP
@@ -490,6 +493,7 @@ SELECT
 | MICROSECOND | 마리크로초 추출(소수점 6자리까지) | 678901 | 0 ~ 999999 |
 | DAYOFWEEK | 요일 추출(**1**=일요일 , **7**=토요일) | 7 (토요일이어서) | 요일 번호 반환 |
 | DATE | 날짜 부분만 추출 (TIMESTAMP -> DATE) | 2025-05-10 | 시간 제거 |
+
 <br>
 
 #### Datetime 시간 자르기 : DATETIME_TRUNC
@@ -520,6 +524,7 @@ SELECT
 | HOUR | 해당 시각의 00분 00초 | 2025-05-10 14:00:00 |
 | MINUTE | 해당 시각의 00초 | 2025-05-10 14:23:00 |
 | SECOND | 	마이크로초 제거 | 2025-05-10 14:23:45 |
+
 <br>
 
 #### 문자열 -> 날짜 타입 변경 : PARSE_DATETIME
