@@ -36,13 +36,13 @@ RANK() OVER (PARTITION BY 학년 ORDER BY 키 DESC) AS 학년 별 키 순위
   - `PARTITION BY` : 데이터를 특정 기준으로 나눈다.
   - `ORDER BY` : 윈도우 내에서 행의 순서를 지정한다.
 - 윈도우 프레임(윈도우 함수가 작동하는 범위)
-<br>
+<br><br>
 
 ## 3. 윈도우 함수의 종류
 - 탐색 함수 : `LEAD`, `LAG`, `FIRST_VALUE`, `LAST_VALUE`
 - 번호 함수 : `RANK`, `ROW_NUMBER`, `DENSE_RANK`, `NTILE` 등
 - 집계 함수 : 집계 함수들, `AVG`, `COUNT`, `SUM`, `MAX`, `MIN`, ...
-<br>
+<br><br>
 
 ## 4. 탐색 함수
 - Row들을 탐색하며 값을 찾는 함수. 정렬이 항상 필요
@@ -57,7 +57,7 @@ SELECT
   LEAD(value) OVER (ORDER BY date) AS next_val
 FROM dataset;
 ```
-<br>
+<br><br>
 
 ### LAG(expr, offset, default) : 이전 행
 - 이전 행의 값을 반환
@@ -69,7 +69,7 @@ SELECT
   LAG(value) OVER (ORDER BY date) AS prev_val
 FROM dataset;
 ```
-<br>
+<br><br>
 
 ### FIRST_VALUE(expr) : 첫 번째 값
 - 지정한 그룹의 첫 번째 값
@@ -78,7 +78,7 @@ FROM dataset;
 -- ex) 상점별 첫 날 매출을 구함
 FIRST_VALUE(sales) OVER (PARTITION BY store ORDER BY date)
 ```
-<br>
+<br><br>
 
 ### LAST_VALUE(expr) : 마지막 값
 - 지정한 그룹의 마지막 값
@@ -107,7 +107,7 @@ SELECT LAST_VALUE(sales) OVER (
   ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
 ) AS correct_last;
 ```
-<br>
+<br><br>
 
 ### FIRST_VALUE, LAST_VALUE의 NULL 처리
 - 일반적인 집계 함수들에서 NULL을 처리하는 방식
@@ -123,7 +123,7 @@ SELECT
   LAST_VALUE(numbers IGNORE NULLS) OVER(ORDER BY date) AS last_num
 FROM raw_data;
 ``` 
-<br>
+<br><br>
 
 ### 탐색 함수를 활용해서 할 수 있는 것
 - USER가 앱/웹에 접속한 후, 어떤 화면으로 이동했는지 알 수 있음
@@ -131,7 +131,7 @@ FROM raw_data;
 - 한 USER의 앱 로그 상에서 직전 이벤트와 현재 이벤트가 동일한 것들을 필터링할 수 있음
   - 같은 페이지를 연속으로 접근한 경우 하나로 처리해서 퍼널을 구할 때 활용 가능
 - 리텐션 쿼리를 작성할 때 기준점을 만들 수 있음. (유저의 첫 접속일)
-<br>
+<br><br>
 
 ## 5. 번호 함수
 - 탐색 함수와 유사. 번호 지정(번호표를 주는 행위)를 하는 함수들
@@ -144,7 +144,7 @@ FROM raw_data;
 -- 단, 동일 salary 나와도 순차적으로 부여. 
 ROW_NUMBER() OVER (PARTITION BY dept ORDER BY salary DESC)
 ```
-<br>
+<br><br>
 
 ### RANK() : 순위
 - 동일한 값은 동일 순위, 그 다음 순위는 건너뜀 (1, 2, 2, 4...)
@@ -154,7 +154,7 @@ ROW_NUMBER() OVER (PARTITION BY dept ORDER BY salary DESC)
 -- 같은 score나오면 같은 숫자 부여. 다음 나오는 숫자는 숫자 하나 건너뛰고 부여. 
 RANK() OVER (ORDER BY score DESC)
 ```
-<br>
+<br><br>
 
 ### DENSE_RANK() : rank와 비슷하지만 건너뛰지 않음
 - 동일한 값은 같은 순위, 건너뛰지 않음 (1, 2, 2, 3...)
@@ -164,7 +164,7 @@ RANK() OVER (ORDER BY score DESC)
 -- 같은 score나오면 같은 숫자 부여. 다음 나오는 숫자는 건너뛰지 않고 부여. (1, 2, 2, 3, ...)
 DENSE_RANK() OVER (ORDER BY score DESC)
 ```
-<br>
+<br><br>
 
 ### NTILE(n) : n개의 구간으로 나눔
 - n개의 구간으로 균등하게 행을 나눔
@@ -172,20 +172,20 @@ DENSE_RANK() OVER (ORDER BY score DESC)
 ```
 NTILE(4) OVER (ORDER BY score)
 ```
-<br>
+<br><br>
 
 ### ROW_NUMBER와 RANK의 차이
 - 중복 값을 어떻게 처리하는 지의 차이
 - `RANK` : 중복이 있으면 공동 N으로 처리하고 그 다음 값은 패스. 
   - 공동 2등이 있으면 3등은 없고 4등이 나옴.
 - `ROW_NUMBER` : 중복이 있으면 랜덤으로 숫자 부여
-<br>
+<br><br>
 
 ### ROW_NUMBER와 RANK 중 어떤 것을 선택해야 할까?
 - 파티션 내에서 고유한 순서가 필요한 경우 : `ROW_NUMBER`
 - 파티션 내에서 동일한 값을 가진 행에 대해 동일한 순서를 부여해야 할 경우 : `RANK`
 - 상위 30%의 그룹화를 위해 랭킹을 뽑고 싶은 경우 : `RANK`
-<br>
+<br><br>
 
 - `ROW_NUMBER`를 사용하면 순서가 보장되지 않는 것 아닐까?
   - 특정 value 기준으로는 동일한 값이 생길 수 있고, 그런 경우 쿼리를 실행할 때마다 값이 달라질 수 있음
@@ -195,18 +195,18 @@ NTILE(4) OVER (ORDER BY score)
 -- ex
 ROW_NUMBER() OVER (PARTITION BY dept ORDER BY salary DESC, id)
 ```
-<br>
+<br><br>
 
 ## 6. 집계 분석 함수
 - `GROUP BY` 없이 누적 합/평균/최대값 등을 구할 수 있음
 - 여러 값을 가지고 계산하는 함수
   - `AVG`, `COUNT`, `SUM`, `MAX`, `MIN`, ...
-<br>
+<br><br>
 
 ### 윈도우 함수 vs GROUP BY 비교
 - GROUP BY : 여러 Row의 값을 집계해서 반환
 - 윈도우 함수 : 각각의 Row에 값을 계산해서 반환
-<br>
+<br><br>
 
 ### SUM, AVG, COUNT, MIN, MAX
 - 각각 누적 합계, 누적 평균, 누적 개수, 누적 최소 값, 누적 최대 값
@@ -215,7 +215,7 @@ ROW_NUMBER() OVER (PARTITION BY dept ORDER BY salary DESC, id)
 -- ex) store 별 누적 매출액
 SUM(sales) OVER (PARTITION BY store ORDER BY date)
 ```
-<br>
+<br><br>
 
 ## 7. 데이터 범위 지정 - Frame 설정
 - 데이터의 범위를 제한해서 연산하고 싶은 경우
@@ -225,19 +225,19 @@ SUM(sales) OVER (PARTITION BY store ORDER BY date)
   - 어떤 것이 방향성을 가지고 움직일 때, 이동하면서 구해지는 평균
   - 예를 들어, 특정 row에서 이전 3번째부터 이후 2번째의 데이터의 평균
 - ex) rowdml 3개월 전 데이터부터 현재 row까지 합계
-<br>
+<br><br>
 
 ### Frame 설정 방법
 #### 1) ROWS
 - 물리적인 행의 수를 기준으로 경계를 지정
   - ex) 이전 행, 이후 3개의 행
 - ROWS Frame를 더 많이 사용
-<br>
+<br><br>
 
 #### 2) RANGE
 - 논리적인 값의 범위를 기준으로 지정
   - ex) 값의 3일 전, 3일 후
-<br>
+<br><br>
 
 #### Frame의 시작과 끝 지점 명시
 - `PRECEDING` : 현재 행 기준으로 이전 행
@@ -256,7 +256,7 @@ ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING)
 AVG(col) OVER (PARTITION BY product_type ORDER BY timestamp
 ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
 ```
-<br>
+<br><br>
 
 ## 8. 윈도우 함수 조건 설정 - QUALIFY
 ### QUALIFY란?
@@ -275,7 +275,7 @@ FROM your_table
 (WHERE) 테이블 조건
 QUALIFY <윈도우 함수 결과 조건>
 ```
-<br>
+<br><br>
 
 ### QUALIFY를 왜 쓸까?
 - 기존 SQL에서는 윈도우 함수 결과를 필터링하려면 서브쿼리를 써야 했음
@@ -296,7 +296,7 @@ SELECT *
 FROM user_logs
 QUALIFY ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY login_time DESC) = 1
 ```
-<br>
+<br><br>
 
 ### 자주 쓰는 예제
 - 1) 유저별 마지막 접속 기록
@@ -306,7 +306,7 @@ SELECT *
 FROM user_logs
 QUALIFY ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY login_time DESC) = 1;
 ```
-<br>
+<br><br>
 
 - 2) 제품별 매출 상위 3위
 
@@ -315,7 +315,7 @@ SELECT *
 FROM sales
 QUALIFY RANK() OVER (PARTITION BY product_id ORDER BY sales_amount DESC) <= 3;
 ```
-<br>
+<br><br>
 
 - 3) 유저별 가장 이른 구매 상품
 

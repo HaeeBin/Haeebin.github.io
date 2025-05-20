@@ -33,7 +33,7 @@ ARRAY<STRING>                     -- 배열 자료형
 -- ex) 
 SELECT ['apple', 'banana', 'grape'] AS fruits;
 ```
-<br>
+<br><br>
 
 ### ARRAY 생성하기
 1) 대괄호 사용
@@ -45,7 +45,7 @@ SELECT ['apple', 'banana', 'grape'] AS fruits;
   UNION ALL
   SELECT [5, 10]
   ```
-  <br>
+  <br><br>
 
 2) ARRAY<> 사용 : ARRAY< 자료형>
 
@@ -53,7 +53,7 @@ SELECT ['apple', 'banana', 'grape'] AS fruits;
   SELECT
     ARRAY<INT64>[0, 1, 3] AS some_numbers
   ```
-  <br>
+  <br><br>
 
 3) 배열 셍성 함수 사용
 
@@ -63,7 +63,7 @@ SELECT ['apple', 'banana', 'grape'] AS fruits;
     GENERATE_DATE_ARRAY('2024-01-01', '2024-02-01', INTERVAL 1 WEEK) AS
     GENERATE_ARRAY(1, 5, 2) AS output2
   ```
-  <br>
+  <br><br>
 
 4) ARRAY_AGG 함수 사용 : 여러 결과를 마지막에 배열로 저장하고 싶은 경우
 
@@ -78,7 +78,7 @@ SELECT ['apple', 'banana', 'grape'] AS fruits;
   SELECT ARRAY_AGG(programming_language) AS output
   FROM programming_languages
   ```
-  <br>
+  <br><br>
 
 ### ARRAY의 데이터 접근하기
 - 배열에 접근하기 위해서는 `OFFSET`, `ORDINAL`을 사용
@@ -95,7 +95,7 @@ SELECT
 -- ex)
 SELECT arr[OFFSET(0)]   -- ['a', 'b', 'c']
 ```
-<br>
+<br><br>
 
 ## 2. STRUCT
 - 하나의 값처럼 다루는 필드들의 묶음
@@ -113,7 +113,7 @@ SELECT [
   STRUCT('banana' AS name, 800 AS price)
 ] AS products;
 ```
-<br>
+<br><br>
 
 ### STRUCT 생성하기
 1) 소괄호() 사용
@@ -123,7 +123,7 @@ SELECT [
   SELECT
     (1,2,3) AS struct_test
   ```
-  <br>
+  <br><br>
 
 2) STRUCT<>() 사용 : STRUCT<자료형>(데이터)
 
@@ -131,7 +131,7 @@ SELECT [
   SELECT
     STRUCT<hi INT64, hello INT64, awesome STRING>(1, 2, 'HI') AS struct_test
   ```
-  <br>
+  <br><br>
 
 ### STRUCT의 값에 접근하기
 - STRUCT 이름.key 형식
@@ -149,7 +149,7 @@ arr[OFFSET(0)].name     -- ARRAY<STRUCT<name, price>>
 - ARRAY안에 ARRAY 가능
 => 유연하게 데이터를 저장할 수 있음
 => 중첩된 구조
-<br>
+<br><br>
 
 ## 4. UNNSET : 중첩된 데이터 구조를 풀기
 ### UNNEST란?
@@ -173,7 +173,7 @@ SELECT
   alias_name
 FROM Table_A AS a, UNNEST(ARRAY_Column) AS alias_name
 ```
-<br>
+<br><br>
 
 ### 예시
 1) 유저가 구매한 제품 배열
@@ -185,7 +185,7 @@ SELECT
 FROM purchase_log
 GROUP BY user_id;
 ```
-<br>
+<br><br>
 
 2) JSON-like 테이블 구조
 
@@ -202,7 +202,7 @@ SELECT
   item.quantity
 FROM orders, UNNEST(items) AS item;
 ```
-<br>
+<br><br>
 
 ## 5. 여러 배열 함수
 ### ARRAY_LENGTH()
@@ -218,7 +218,7 @@ ARRAY_LENGTH(array_expr)
 -- ex) 결과 : 3
 SELECT ARRAY_LENGTH(['a', 'b', 'c']) AS length;
 ```
-<br>
+<br><br>
 
 ### ARRAY_AGG()
 - 여러 행의 값을 배열로 집계(aggregate)
@@ -237,7 +237,7 @@ SELECT
 FROM employees
 GROUP BY department;
 ```
-<br>
+<br><br>
 
 ### ARRAY_TO_STRING()
 - 배열을 문자열로 구분자(delimiter) 를 넣어 합치기
@@ -253,7 +253,7 @@ SELECT ARRAY_TO_STRING(['A', 'B', 'C'], '-') AS result;
 SELECT ARRAY_TO_STRING(['A', NULL, 'C'], '-', 'x');
 
 ```
-<br>
+<br><br>
 
 ### GENERATE_ARRAY()
 - 숫자의 연속된 배열 생성
@@ -271,7 +271,7 @@ SELECT GENERATE_ARRAY(1, 5) AS nums;
 -- ex) [0, 2, 4, 6, 8, 10]
 SELECT GENERATE_ARRAY(0, 10, 2) AS evens;
 ```
-<br>
+<br><br>
 
 ### ARRAY_REVERSE()
 - 배열의 순서를 뒤집어 반환
@@ -286,7 +286,7 @@ ARRAY_REVERSE(array_expr)
 -- ex) 결과: [3, 2, 1]
 SELECT ARRAY_REVERSE([1, 2, 3]) AS reversed;
 ```
-<br>
+<br><br>
 
 ### ARRAY_CONCAT()
 - 여러 배열을 이어 붙여 하나의 배열로 만듦
@@ -300,7 +300,7 @@ ARRAY_CONCAT(array1, array2)
 -- ex) 결과: [1, 2, 3, 4]
 SELECT ARRAY_CONCAT([1, 2], [3, 4]) AS merged;
 ```
-<br>
+<br><br>
 
 ### ARRAY(SELECT ...)
 - 하위 쿼리의 결과를 배열로 반환
@@ -315,7 +315,7 @@ ARRAY(SELECT expression FROM table WHERE condition)
 -- ex) 결과: ['a', 'b', 'c']
 SELECT ARRAY(SELECT name FROM UNNEST(['a', 'b', 'c']) AS name) AS names;
 ```
-<br>
+<br><br>
 
 ### ARRAY_DISTINCT()
 - 배열 내 중복값을 제거하고 고유한 값만 남김
@@ -331,7 +331,7 @@ ARRAY_DISTINCT(array_expr)
 -- ex) 결과: [1, 2, 3]
 SELECT ARRAY_DISTINCT([1, 2, 2, 3, 3, 3]) AS distinct_values;
 ```
-<br>
+<br><br>
 
 #### 예시 
 - 페이지 방문 내역 중 고유한 페이지만 최신순으로 반환
@@ -345,13 +345,13 @@ SELECT
   ) AS processed_pages
 FROM my_table;
 ```
-<br>
+<br><br>
 
 # PIVOT 
 ## 1. PIVOT이란?
 - PIVOT의 뜻은 축을 중심으로 회전한다
 - 테이블의 특정 컬럼 값을 열 이름으로 변환하여 가로 방향으로 요약 집계된 형태를 만드는 SQL 구문
-<br>
+<br><br>
 
 ## 2. PIVOT이 필요한 이유
 1) 성능(퍼포먼스)
@@ -362,7 +362,7 @@ FROM my_table;
 <br>
 
 2) 데이터 시각화 도구에서 PIVOT한 형태를 지원
-<br>
+<br><br>
 
 ## 기본 문법
 
@@ -380,7 +380,7 @@ GROUP BY 그룹컬럼
 - `<pivot_column>` : 열로 바꿀 대상 컬럼 (피벗 기준)
 - `IN (...)` : 열로 만들 실제 값 목록
 - `<group_column>` : 그룹화 기준 컬럼 (피벗에서 고정됨)
-<br>
+<br><br>
 
 ## 예시
 ### 예제 1 : 학생별 과목 점수를 가로 방향으로 피벗
@@ -398,7 +398,7 @@ GROUP BY student
 - `IF(subject = '수학', score, NULL)` → 수학일 때만 점수, 아니면 NULL
 - `MAX(...)` → 학생-과목 조합은 하나뿐이므로 집계 함수로 하나의 값만 반환
 - 결과적으로 subject가 행이 아니라 열로 바뀜
-<br>
+<br><br>
 
 ### 실무 활용 예시
 - 유저별 이벤트 수 요약
