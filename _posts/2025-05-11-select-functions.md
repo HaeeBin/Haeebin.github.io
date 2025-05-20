@@ -28,7 +28,7 @@ last_modified_at: 2025-05-11
 - 쿼리 실행 Output 형태를 예상해보기
 => 매번 실행하고 확인하는 것이 아니라 지금 쿼리가 어떻게 될 지 예상해보고 실제랑 어떻게 다른지 확인!
 
-<br>
+<br><br>
 
 # 데이터베이스
 ## 1. OLTP
@@ -40,19 +40,20 @@ last_modified_at: 2025-05-11
   - 데이터의 추가(INSERT), 데이터의 변경(UPDATE) 많이 발생함
 - SQL을 사용해서 데이터를 추출할 수 있지만 분석을 위해 만든 데이터베이스가 아니기 때문에 쿼리 속도가 느릴 수 있음
 
-<br>
+<br><br>
 
 ## 2. OLAP
 - OLTP로 데이터 분석을 하다가 기능 부족 이슈로 인해 OLAP 등장
 - Online Analytical Processing
   - 분석을 위한 기능 제공
 <br>
+
 - 데이터 웨어하우스
   - 데이터를 한 곳에 모아서 저장
   - 여러 곳에 저장된 데이터 예시
   - Daatabase, 웹(크롤링), 파일, API 결과 등
 
-<br>
+<br><br>
 
 ## 3. BigQuery
 ### BigQuery란?
@@ -61,6 +62,8 @@ last_modified_at: 2025-05-11
 - 회사에서 앱이나 웹에서 Firebase, Google Analytics 4를 활용할 경우 많이 사용함
 - 또한, 적은 비용(인력 등)으로 운영을 하기 위해 많이 사용함
 
+<br>
+
 ### BigQuery 장점
 - SQL을 사용해 쉽게 데이터를 추출할 수 있음
 - OLAP 도구 -> 속도가 빠름(단, 그만큼 돈을 지불)
@@ -68,7 +71,7 @@ last_modified_at: 2025-05-11
   - 사용 기기, 위치(시 단위까지 표현), OS 버전, 이벤트 행동 획득 가능(별도의 로깅 필요)
 - Google에서 인프라를 관리하는 데이터 웨어하우스이기 때문에 서버(컴퓨터)를 띄울 필요 없음
 
-<br>
+<br><br>
 
 # SQL
 ## 1. 기본적인 SQL 쿼리 구조
@@ -97,7 +100,7 @@ SELECT 집계할 컬럼1, 집계 함수, ...
 FROM Table
 GROUP BY 집계할 컬럼1
 ```
-<br>
+<br><br>
 
 ### (2) 중복 데이터 제거 : DISTINCT
 - 컬럼 이름 앞에 `DISTINCT`를 붙이면 중복된 값은 1개만 출력됨
@@ -110,7 +113,7 @@ FROM Table
 GROUP BY 
 	집계할 컬럼
 ```
-<br>
+<br><br>
 
 ### (3) 조건 설정 : WHERE
 - `Table`에 조건을 설정하고 싶은 경우 사용
@@ -123,7 +126,7 @@ FROM Table
 WHERE
 	컬럼1 >= 3
 ```
-<br>
+<br><br>
 
 ### (4) 그룹 조건 설정 : HAVING
 - `GROUP BY`한 후 조건을 설정하고 싶은 경우 사용
@@ -137,7 +140,7 @@ GROUP BY 컬럼1, 컬럼2
 HAVING
 	col1_count > 3
 ```
-<br>
+<br><br>
 
 ### (5) 조회 데이터 정렬 : ORDER BY
 - 특정 컬럼의 데이터를 기준으로 오름차순/내림차순 조회할 때 사용
@@ -151,7 +154,7 @@ SELECT
 FROM Table
 ORDER BY col DESC
 ```
-<br>
+<br><br>
 
 ### (6) 출력 개수 제한 : LIMIT
 - 쿼리문의 결과 Row 수를 제한하고 싶은 경우 사용
@@ -164,7 +167,7 @@ FROM Table
 ORDER BY col DESC
 LIMIT 5
 ```
-<br>
+<br><br>
 
 ## 3. 데이터 변환하기
 ### (1) 자료 타입 변환 : CAST
@@ -174,7 +177,7 @@ LIMIT 5
 SELECT 
 	CAST(1 AS STRING) # 숫자 1을 문자1로 변경
 ```
-<br>
+<br><br>
 
 - 더 안전하게 데이터 타입 변경하기 : `SAFE_CAST`
   - `SAFE_`가 붙은 함수는 변환이 실패할 경우 NULL 반환
@@ -183,7 +186,7 @@ SELECT
 SELECT 
 	SAFE_CAST("SQL" AS INT64) # 결과 NULL로 출력됨
 ```
-<br>
+<br><br>
 
 ### (2) 수학 함수
 - 수학 함수는 수학 연산(평균, 표준편차, 코사인 등)이 존재
@@ -192,7 +195,7 @@ SELECT
   - 그냥 나누기할 경우 x, y 중 하나라도 0인 경우 zero error 발생
   
 ![](https://velog.velcdn.com/images/haeebin/post/b337dc14-221d-4206-9782-e33addf05855/image.png)
-<br>
+<br><br>
 
 #### 절댓값 구하기 : ABS
 - 절댓값을 반환할 때 사용
@@ -204,7 +207,7 @@ SELECT
 	ABS(col1 - col2) AS abs_diff
 FROM table
 ```
-<br>
+<br><br>
 
 - 자료형의 범위를 넘으면 산술 오버플로 에러가 발생함
   - 단, BigQuery에서는 오버플로우 에러가 발생하지 않음
@@ -219,7 +222,7 @@ SELECT ABS(-2147483648)		# expression을(를) 데이터 형식 int(으)로 변�
 -- BigQuery
 SELECT ABS(-2147483648)		# 2147483648 출력
 ```
-<br>
+<br><br>
 
 #### 양수/음수 판단 : SIGN
 - 지정한 값이나 식의 양수, 음수, 0을 판단해 1, -1, 0 반환
@@ -231,7 +234,7 @@ SELECT ABS(-2147483648)		# 2147483648 출력
 SELECT SIGN(-125), SIGN(0), SIGN(564)
 -- -1, 0, 1 출력
 ```
-<br>
+<br><br>
 
 #### 지정한 숫자보다 크거나 같은 값 구하기 : CEIL, CEILING
 - 소수점을 올려 지정한 값보다 크거나 같은 최소 정수 반환
@@ -240,7 +243,7 @@ SELECT SIGN(-125), SIGN(0), SIGN(564)
 SELECT CEIL(123.45), CEILING(-123.45)
 -- 124, -123 출력
 ```
-<br>
+<br><br>
 
 #### 지정한 숫자보다 작거나 같은 값 구하기 : FLOOR
 - 소수점을 내려 지정한 값보다 작거나 같은 최대 정수 반환
@@ -249,7 +252,7 @@ SELECT CEIL(123.45), CEILING(-123.45)
 SELECT FLOOR(123.45), FLOOR(-123.45)
 -- 123, -124 출력
 ```
-<br>
+<br><br>
 
 #### 소수점 반올림 하기: ROUND
 - 소수점 반올림한 값을 구함
@@ -259,7 +262,7 @@ SELECT FLOOR(123.45), FLOOR(-123.45)
 SELECT ROUND(123.4567), ROUND(123.4567, 2)
 -- 123, 123.46 출력
 ```
-<br>
+<br><br>
 
 #### 로그 함수: LOG
 - 로그 계산. 기본 계산은 자연로그(`ln`), 두 번째 인자로 밑 지정 가능
@@ -271,7 +274,7 @@ LOG(float_expression [, base])
 -- ex) ln(10), log10(100)
 SELECT LOG(10), LOG(100, 10);
 ```
-<br>
+<br><br>
 
 #### 지수 함수(e의 n 제곱값) : EXP
 - `e`의 x 제곱 계산
@@ -279,7 +282,7 @@ SELECT LOG(10), LOG(100, 10);
 ```
 SELECT EXP(2);  -- ≈ 7.389056
 ```
-<br>
+<br><br>
 
 #### 거듭제곱 값, 제곱근 구하기 : POWER, SQRT
 - `POWER(x, y)`는 x의 y 거듭제곱 값을 구할 때 사용
@@ -293,7 +296,7 @@ SELECT POWER(2, 3);  -- 8
 ```
 SELECT SQRT(9), SQRT(4);  -- 3, 2
 ```
-<br>
+<br><br>
 
 #### 난수 구하기 : RAND
 - 0 이상 1 미만의 난수 생성
@@ -301,7 +304,7 @@ SELECT SQRT(9), SQRT(4);  -- 3, 2
 ```
 SELECT RAND();
 ```
-<br>
+<br><br>
 
 #### 삼각함수 : SIN, COS, TAN, ATAN, PI()등
 - 각도를 라디안 단위로 받아 삼각값 반환
@@ -311,7 +314,7 @@ SELECT RAND();
 SELECT SIN(PI()/2), COS(PI()), TAN(PI()/4);
 SELECT ATAN(1);  -- 역탄젠트 
 ```
-<br>
+<br><br>
 
 ### (3) 문자열 함수
 - 문자열로 할 수 있는 대표적인 연산
@@ -320,7 +323,7 @@ SELECT ATAN(1);  -- 역탄젠트
   - 특정 단어 수정하기
   - 문자열 자르기
   - 영어 대문자 변환
-<br>
+<br><br>
 
 #### 문자열 붙이기 : CONCAT
 - 여러 문자열을 붙여서 하나의 문자열로 합침
@@ -335,7 +338,7 @@ CONCAT(string1, string2 [, ...])
 -- ex) 'Hello', 'World' 사용해서 'Hello World' 출력하기
 SELECT CONCAT('Hello', ' ', 'World')
 ```
-<br>
+<br><br>
 
 #### 문자열 분리하기 : SPLIT
 - 지정한 구분자를 기준으로 문자열을 배열로 나눔
@@ -347,7 +350,7 @@ SPLIT(문자열 원본, 나눌 기준이 되는 문자)
 -- ex) 결과: ['apple', 'banana', 'grape']
 SELECT SPLIT('apple,banana,grape', ',')
 ```
-<br>
+<br><br>
 
 #### 특정 단어 수정하기 : REPLACE
 - 문자열에서 특정 문자열을 다른 문자열로 바꿈
@@ -359,7 +362,7 @@ REPLACE(문자열 원본, 찾을 단어, 바꿀 단어)
 -- ex) '결과: 'I loves SQL'
 SELECT REPLACE('I loves coding', 'coding', 'SQL')
 ```
-<br>
+<br><br>
 
 #### 문자열 자르기 : TRIM
 - 문자열의 앞뒤 공백 또는 지정 문자 제거
@@ -375,7 +378,7 @@ SELECT TRIM('   hello   ');          -- 'hello'
 SELECT TRIM(BOTH 'x' FROM 'xxdatax'); -- 'data'
 SELECT TRIM('Hello World', 'World');  -- 'Hello'
 ```
-<br>
+<br><br>
 
 #### 영어 대문자 변환 : UPPER
 - 문자열의 모든 알파벳을 대문자로 변환
@@ -387,7 +390,7 @@ UPPER(string)
 -- ex) 결과 : 'BIGQUERY'
 SELECT UPPER('bigquery')
 ```
-<br>
+<br><br>
 
 ### (4) 날짜/시간 함수
 - 날짜 및 시간 타입에는 총 4개가 있음
@@ -400,7 +403,7 @@ SELECT UPPER('bigquery')
   - `TIMESTAMP` : 날짜와 시간을 함께 표현하며, 타임존 정보까지 포함 
                  (Bigquery에서는 기본적으로 UTC 기준 시간이 표현)
     - ex) 2025-02-22 20:11:40.000UTC
-<br>
+<br><br>
 
 - Timezone에서 GMT와 UTC는?
   - GMT : Greenwich Mean Time(한국 시간 : GMT +9)
@@ -414,7 +417,7 @@ SELECT UPPER('bigquery')
     - 시간 도장
     - UTC부터 경과한 시간을 나타내는 값
     - Timezone 정보 있음
-<br>
+<br><br>
 
 - `millisecond`, `microsecond`
   - `millisecond(ms)`
@@ -432,7 +435,7 @@ SELECT UPPER('bigquery')
     TIMESTAMP_MICROS(1704176819711000) AS micro_to_timestamp_value,
     DATETIME(TIMESTAMP_MICROS(1704176819711000)) AS datetime_value;
   ```
-<br>
+<br><br>
 
 - `TIMESTAMP`와 `DATETIME`의 차이
 
@@ -441,7 +444,7 @@ SELECT UPPER('bigquery')
 | 타임존 | UTC라고 나옴 | T가 나옴(Time을 의미) |
 | 시간 차이 | 한국 시간 -9시간 | 한국 Zone 사용 시 한국 시간과 동일 |
 
-<br>
+<br><br>
 
 #### 현재 시간을 다루기 : CURRENT_DATE / CURRENT_DATETIME / CURRENT_TIMESTAMP
 - 현재 날짜를 `DATE` / `DATETIME` / `TIMESTAMP` 형식으로 반환
@@ -463,7 +466,7 @@ SELECT CURRENT_DATETIME('Asia/Seoul');  # timezone지정안하면 2025-05-11T01:
 -- ex) 결과 : 2025-05-11 01:43:22.954613 UTC
 SELECT CURRENT_TIMESTAMP();
 ```
-<br>
+<br><br>
 
 #### 특정 부분 추출하기 : EXTRACT
 - 날짜/시간 데이터에서 원하는 일부분(연, 월, 일, 시 등) 을 추출
@@ -494,7 +497,7 @@ SELECT
 | DAYOFWEEK | 요일 추출(**1**=일요일 , **7**=토요일) | 7 (토요일이어서) | 요일 번호 반환 |
 | DATE | 날짜 부분만 추출 (TIMESTAMP -> DATE) | 2025-05-10 | 시간 제거 |
 
-<br>
+<br><br>
 
 #### Datetime 시간 자르기 : DATETIME_TRUNC
 - 지정한 `DATETIME` 값을 `part` 단위로 내림(잘라냄) 해서 반환하는 함수
@@ -525,7 +528,7 @@ SELECT
 | MINUTE | 해당 시각의 00초 | 2025-05-10 14:23:00 |
 | SECOND | 	마이크로초 제거 | 2025-05-10 14:23:45 |
 
-<br>
+<br><br>
 
 #### 문자열 -> 날짜 타입 변경 : PARSE_DATETIME
 - 문자열로 저장된 DATETIME을 DATETIME 타입으로 바꾸고 싶은 경우 사용
@@ -543,7 +546,7 @@ SELECT PARSE_DATE('%Y-%m-%d', '2025-05-10'); -- DATE 값 반환
 SELECT PARSE_DATETIME('%Y-%m-%d %H:%M:%S', '2024-01-11 12:35:35'); -- DATETIME 값 반환
 SELECT PARSE_TIMESTAMP('%Y-%m-%d %H:%M:%S', '2025-05-10 12:34:56'); -- TIMESTAMP 값 반환
 ```
-<br>
+<br><br>
 
 #### 날짜 -> 문자열 타입 변경 : FORMAT_DATETIME
 - DATETIME 타입 데이터를 지정한 형식의 문자열 데이터로 변환
@@ -562,7 +565,7 @@ SELECT
     FORMAT_DATETIME("%c", DATETIME "2024-01-11 12:35:35"), -- Thu Jan 11 12:35:35 2024
     FORMAT_TIMESTAMP('%F %T', TIMESTAMP '2025-05-10 12:00:00'), -- '2025-05-10 12:00:00'
 ```
-<br>
+<br><br>
 
 #### 주어진 날짜의 마지막 날 : LAST_DAY
 - 주어진 날짜를 기준으로 월, 분기, 해 등 기간의 마지막 날을 반환
@@ -583,7 +586,7 @@ SELECT
   LAST_DAY(DATE '2025-05-10', YEAR) AS end_of_year, -- 2025-12-31
   SELECT LAST_DAY(TIMESTAMP '2025-05-10 14:23:00'); -- 결과: 2025-05-31 (DATE 타입으로 반환)
 ```
-<br>
+<br><br>
 
 #### 두 날짜의 차이 : DATETIME_DIFF
 - `datetime1 - datetime2`의 차이를 원하는 단위로 반환
@@ -606,7 +609,7 @@ SELECT TIMESTAMP_DIFF(
   MILLISECOND
 );
 ```
-<br>
+<br><br>
 
 #### 날짜 더하기 : DATE_ADD
 - 날짜 또는 타임스탬프에 일정 기간을 더하거나 빼는 함수
